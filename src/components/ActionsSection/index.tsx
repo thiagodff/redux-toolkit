@@ -1,48 +1,55 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useDispatch } from 'react-redux';
 
+import {
+	decrementCounter,
+	incrementCounter,
+	randomIncrementCounter,
+	resetCounter,
+} from '../../store/slices/counter';
 import Button from '../Button';
 import * as S from './styles';
 
-type ActionsSectionProps = {
-  setCounter: Dispatch<SetStateAction<number>>;
-};
+const ActionsSection = () => {
+	const dispatch = useDispatch();
 
-const ActionsSection = ({ setCounter }: ActionsSectionProps) => {
-  const incrementCounter = () => setCounter((prevState) => prevState + 1);
+	const increment = () => dispatch(incrementCounter());
 
-  const decrementCounter = () =>
-    setCounter((prevState) => {
-      if (prevState === 0) {
-        return prevState;
-      }
+	const decrement = () => dispatch(decrementCounter());
 
-      return prevState - 1;
-    });
+	const reset = () => dispatch(resetCounter());
 
-  const resetCounter = () => setCounter(0);
+	const randomIncrement = () => {
+		const randomNumber = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
 
-  return (
-    <S.Container>
-      <p>
-        Vamos aprender como implementar a última versão do Redux, utilizando o
-        Redux Toolkit e Typescript.
-      </p>
+		return dispatch(randomIncrementCounter({ value: randomNumber }));
+	};
 
-      <div>
-        <Button type="button" onClick={incrementCounter}>
-          Increment
-        </Button>
+	return (
+		<S.Container>
+			<p>
+				Vamos aprender como implementar a última versão do Redux, utilizando o
+				Redux Toolkit e Typescript.
+			</p>
 
-        <Button type="button" onClick={decrementCounter}>
-          Decrement
-        </Button>
+			<div>
+				<Button type="button" onClick={increment}>
+					Increment
+				</Button>
 
-        <Button type="button" onClick={resetCounter}>
-          Reset
-        </Button>
-      </div>
-    </S.Container>
-  );
+				<Button type="button" onClick={decrement}>
+					Decrement
+				</Button>
+
+				<Button type="button" onClick={reset}>
+					Reset
+				</Button>
+
+				<Button type="button" onClick={randomIncrement}>
+					Random Increment
+				</Button>
+			</div>
+		</S.Container>
+	);
 };
 
 export default ActionsSection;

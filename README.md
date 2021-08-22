@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+# Redux Toolkit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Com a popularização do Developer Experience (DX) muitas ferramentas vem se adaptando para trazer uma maior facilidade de uso para os desenvolvedores, com o redux não foi diferente. O foco desse repositório é ver como funciona o redux toolkit, uma ferramenta que promete nos auxiliar em todo fluxo de funcionamento de uma arquitetura flux com redux.
 
-## Available Scripts
+## Modules -> Slices
 
-In the project directory, you can run:
+O redux toolkit traz uma nova perspectiva no momento de separar as responsabilidades, no lugar de dividirmos em módulos, agora dividimos em pedaços, ou seja, slices.
 
-### `yarn start`
+## Estado no Reducer
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+O reducer vem com o conceito de imutabilidade, ou seja, nós criamos um novo estado e o antigo não é alterado. Uma forma de trazer um melhor conforto para o dev é utilizar uma lib chamada immer que cria uma espécie de "draft" e nos permite trabalhar com o estado como se ele fosse mutável.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Essa lib ficou tão famosa e foi tão utilizada que o redux toolkit hoje já implementa o immer de maneira nativa, ou seja, nós podemos alterar diretamente o estado dentro do Reducer sem problema nenhum.
 
-### `yarn test`
+## useReduxSelector
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A ideia de criar um hook de selector chamado useReduxSelector é porque nossa aplicação pode ter diferentes tipos de controle de estados, na documentação do redux toolkit é recomendado nomear como useAppSelector, porém, nosso app pode ter Context Api, Redux, etc.
 
-### `yarn build`
+## selectors
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Nós podemos usar dentro do useReduxSelector o useCallback para evitar que sempre que a função seja recriada seja feito uma nova subscription para o Redux, outra abordagem é isolar essa função em uma pasta de selectors dentro do slice correspondente, funciona da mesma forma pois a função não será recriada.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Dependências
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+yarn add @reduxjs/toolkit react-redux
+```
